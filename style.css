@@ -1,0 +1,51 @@
+body {
+    background-color: aquamarine;
+    font-family:'Courier New', Courier, monospace;
+}
+.container {
+    /* background-color: aquamarine; */
+    display: grid;
+    /* height: 100vh; */
+    padding: 20px;
+}
+
+.display-area {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 10px
+}
+
+.card {
+    display: grid;
+    background-color: aliceblue;
+    /* height: fit-content; */
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.card-header {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: 900;
+}
+
+.card-author {
+    display: grid;
+    align-self: center;
+    color: grey;
+}
+
+.card-footer {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr 1fr;
+    justify-content: space-between;
+    color: grey
+}
+.read {
+    text-align: end;
+}
