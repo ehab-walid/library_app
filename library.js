@@ -1,9 +1,9 @@
 const myLibrary = [
-    {title: 'Prisoner', author: 'Olid', num_pages: 130, read: false},
-    {title: 'Prisoner', author: 'Olid', num_pages: 130, read: false},
-    {title: 'Prisoner', author: 'Olid', num_pages: 130, read: false},
-    {title: 'Prisoner', author: 'Olid', num_pages: 130, read: false},
-    {title: 'Prisoner', author: 'Olid', num_pages: 130, read: false}
+  { title: "Prisoner", author: "Olid", num_pages: 130, read: false },
+  { title: "Prisoner", author: "Olid", num_pages: 130, read: false },
+  { title: "Prisoner", author: "Olid", num_pages: 130, read: false },
+  { title: "Prisoner", author: "Olid", num_pages: 130, read: false },
+  { title: "Prisoner", author: "Olid", num_pages: 130, read: false },
 ];
 
 function Book(title, author, num_pages, read) {
@@ -19,6 +19,7 @@ function Book(title, author, num_pages, read) {
 
 function addToLibrary(book) {
   myLibrary.push(book);
+  displayLibrary();
 }
 
 let book1 = new Book("Potter", "Olid", 256, true);
@@ -28,6 +29,7 @@ console.log(myLibrary);
 
 function displayLibrary() {
   const display = document.querySelector(".display-area");
+  display.replaceChildren();
 
   for (book of myLibrary) {
     const card = document.createElement("div");
@@ -43,14 +45,14 @@ function displayLibrary() {
     const card_author = document.createElement("div");
     card_author.classList.add("card-author");
     card_header.appendChild(card_author);
-    card_author.textContent = ' - written by ' + book.author;
+    card_author.textContent = " - written by " + book.author;
     const card_footer = document.createElement("div");
     card_footer.classList.add("card-footer");
     card.appendChild(card_footer);
     const num_pages = document.createElement("div");
     num_pages.classList.add("num-pages");
     card_footer.appendChild(num_pages);
-    num_pages.textContent = book.num_pages + ' pages';
+    num_pages.textContent = book.num_pages + " pages";
     const read = document.createElement("div");
     read.classList.add("read");
     card_footer.appendChild(read);
@@ -58,4 +60,29 @@ function displayLibrary() {
   }
 }
 
-displayLibrary()
+displayLibrary();
+
+const showModalBtn = document.querySelector(".new-book-btn");
+showModalBtn.addEventListener("click", () => {
+  document.getElementById("new-book-modal").showModal();
+});
+
+const new_book_form = document.getElementById("new-book-form");
+new_book_form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  console.log(event.submitter.value);
+  if (event.submitter.value === "submit") {
+    console.log('hello');
+    addToLibrary(
+      new Book(
+        new_book_form.elements["title"].value,
+        new_book_form.elements["author"].value,
+        new_book_form.elements["num_pages"].value,
+        false,
+      ),
+    );
+  }
+
+  new_book_form.reset();
+  document.getElementById("new-book-modal").close();
+});

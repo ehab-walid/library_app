@@ -9,6 +9,17 @@
   </head>
   <body>
     <div class="container">
+      <button class="new-book-btn">Add book</button>
+      <dialog id="new-book-modal">
+        <form id="new-book-form" method="dialog">
+          <h2>Add Book</h2>
+          <label>Title: <input type="text" name="title" required /></label>
+          <label>Author: <input type="text" name="author" required /></label>
+          <label>Number of pages: <input type="number" name="num_pages" required /></label>
+          <button formnovalidate type="submit" value="cancel">Cancel</button>
+          <button  type="submit" value="submit">Submit</button>
+        </form>
+      </dialog>
       <div class="display-area">
         <!-- <div class="card">
           <div class="card-header">
