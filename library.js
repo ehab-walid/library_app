@@ -1,9 +1,39 @@
 const myLibrary = [
-  { title: "Prisoner", author: "Olid", num_pages: 130, read: false },
-  { title: "Prisoner", author: "Olid", num_pages: 130, read: false },
-  { title: "Prisoner", author: "Olid", num_pages: 130, read: false },
-  { title: "Prisoner", author: "Olid", num_pages: 130, read: false },
-  { title: "Prisoner", author: "Olid", num_pages: 130, read: false },
+  {
+    id: crypto.randomUUID(),
+    title: "Prisoner",
+    author: "Olid",
+    num_pages: 130,
+    read: false,
+  },
+  {
+    id: crypto.randomUUID(),
+    title: "Prisoner",
+    author: "Olid",
+    num_pages: 130,
+    read: false,
+  },
+  {
+    id: crypto.randomUUID(),
+    title: "Prisoner",
+    author: "Olid",
+    num_pages: 130,
+    read: false,
+  },
+  {
+    id: crypto.randomUUID(),
+    title: "Prisoner",
+    author: "Olid",
+    num_pages: 130,
+    read: false,
+  },
+  {
+    id: crypto.randomUUID(),
+    title: "Prisoner",
+    author: "Olid",
+    num_pages: 130,
+    read: false,
+  },
 ];
 
 function Book(title, author, num_pages, read) {
@@ -22,10 +52,27 @@ function addToLibrary(book) {
   displayLibrary();
 }
 
+function deleteBook(id) {
+  const index = myLibrary.findIndex((book) => book.id === id);
+  console.log(index);
+  if (index != -1) {
+    myLibrary.splice(index, 1);
+  }
+  displayLibrary();
+}
+
+function changeStatus(id) {
+    const index = myLibrary.findIndex((book) => book.id === id);
+    if (index != -1){
+        myLibrary[index].read = !myLibrary[index].read;
+    }
+    displayLibrary();
+}
+
 let book1 = new Book("Potter", "Olid", 256, true);
 addToLibrary(book1);
 
-console.log(myLibrary);
+// console.log(myLibrary);
 
 function displayLibrary() {
   const display = document.querySelector(".display-area");
@@ -42,10 +89,18 @@ function displayLibrary() {
     card_title.classList.add("card-title");
     card_header.appendChild(card_title);
     card_title.textContent = book.title;
+    const delete_book = document.createElement("div");
+    delete_book.classList.add("delete-book");
+    card_header.appendChild(delete_book);
+    const delete_btn = document.createElement("button");
+    delete_btn.classList.add("delete-btn");
+    delete_btn.setAttribute("data-id", book.id);
+    delete_book.appendChild(delete_btn);
+    delete_btn.textContent = "delete";
     const card_author = document.createElement("div");
     card_author.classList.add("card-author");
     card_header.appendChild(card_author);
-    card_author.textContent = " - written by " + book.author;
+    card_author.textContent = " written by " + book.author;
     const card_footer = document.createElement("div");
     card_footer.classList.add("card-footer");
     card.appendChild(card_footer);
@@ -56,7 +111,31 @@ function displayLibrary() {
     const read = document.createElement("div");
     read.classList.add("read");
     card_footer.appendChild(read);
-    read.textContent = book.read ? "read" : "unread";
+    const read_button = document.createElement("button");
+    read_button.classList.add(book.read ? "read-btn" : "unread-btn");
+    read_button.setAttribute("data-id", book.id);
+    read.appendChild(read_button);
+    read_button.textContent = book.read ? "read" : "unread";
+  }
+
+  const delete_btns = document.querySelectorAll(".delete-btn");
+
+  for (delete_btn of delete_btns) {
+    delete_btn.addEventListener("click", (e) => {
+      const book_id = e.target.getAttribute("data-id");
+      console.log(book_id);
+      deleteBook(book_id);
+    });
+  }
+
+  const read_btns = document.querySelectorAll(".read-btn, .unread-btn");
+
+  for (read_btn of read_btns) {
+    read_btn.addEventListener("click", (e) => {
+      const book_id = e.target.getAttribute("data-id");
+      console.log(book_id);
+      changeStatus(book_id);
+    });
   }
 }
 
@@ -72,7 +151,7 @@ new_book_form.addEventListener("submit", (event) => {
   event.preventDefault();
   console.log(event.submitter.value);
   if (event.submitter.value === "submit") {
-    console.log('hello');
+    console.log("hello");
     addToLibrary(
       new Book(
         new_book_form.elements["title"].value,

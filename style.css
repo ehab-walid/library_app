@@ -2,6 +2,10 @@ body {
     background-color: aquamarine;
     font-family:'Courier New', Courier, monospace;
 }
+
+button:active {
+    transform: scale(95%);
+}
 .container {
     /* background-color: aquamarine; */
     display: grid;
@@ -59,17 +63,20 @@ body {
     display: grid;
     background-color: aliceblue;
     /* height: fit-content; */
-    padding: 10px;
+    padding: 20px;
     border-radius: 10px;
     box-shadow: 0 8px 6px -6px;
+    height: min(30vh, 200px)
 }
 
 .card-header {
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
 }
 
 .card-title {
+    align-self: center;
     font-size: 1.5rem;
     font-weight: 900;
 }
@@ -85,8 +92,36 @@ body {
     width: 100%;
     grid-template-columns: 1fr 1fr;
     justify-content: space-between;
-    color: grey
+    color: grey;
+    align-items: center;
+
 }
 .read {
     text-align: end;
+}
+
+.read-btn {
+    background-color: rgb(21, 97, 202);
+    border: 0px;
+    padding: 7px 15px;
+    border-radius: 20px;
+    color: white;
+}
+
+.unread-btn {
+    background-color: rgb(4, 125, 47);
+    border: 0px;
+    padding: 7px 15px;
+    border-radius: 20px;
+    color: white;
+}
+
+.delete-btn {
+    display: grid;
+    background-color: rgb(223, 26, 42);
+    border: 0px;
+    padding: 7px 15px;
+    border-radius: 20px;
+    color: white;
+    justify-self: end;
 }
