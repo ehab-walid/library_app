@@ -2,7 +2,9 @@ body {
     background-color: aquamarine;
     font-family:'Courier New', Courier, monospace;
 }
-
+button:hover{
+    cursor:pointer;
+}
 button:active {
     transform: scale(95%);
 }
